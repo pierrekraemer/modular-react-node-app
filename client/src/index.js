@@ -10,13 +10,15 @@ import thunkMiddleware from 'redux-thunk';
 
 import { HashRouter } from 'react-router-dom';
 
-import App from './pc_app';
+import App from './cc_app';
 
+import user from './user/user_reducer';
 import weather from './weather/weather_reducer';
 import todolist from './todolist/todolist_reducer';
 
 const store = createStore(
 	combineReducers({
+		user,
 		weather,
 		todolist
 	}),

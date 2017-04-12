@@ -12,13 +12,11 @@ module.exports = {
 			usage: [
 				{
 					verb: 'post',
-					func: todoCtrl.create
-					// func: [ utils.identifyUser, todoCtrl.create ]
+					func: [ utils.identifyUser, todoCtrl.create ]
 				},
 				{
 					verb: 'get',
-					func: todoCtrl.getByUser
-					// func: [ utils.identifyUser, todoCtrl.getByUser ]
+					func: [ utils.identifyUser, todoCtrl.getByUser ]
 				}
 			]
 		},
@@ -27,13 +25,11 @@ module.exports = {
 			usage: [
 				{
 					verb: 'put',
-					func: todoCtrl.updateById
-					// func: [ utils.identifyUser, todoCtrl.updateById ]
+					func: [ utils.identifyUser, todoCtrl.updateById ]
 				},
 				{
 					verb: 'delete',
-					func: todoCtrl.deleteById
-					// func: [ utils.identifyUser, todoCtrl.deleteById ]
+					func: [ utils.identifyUser, todoCtrl.deleteById ]
 				}
 			]
 		}

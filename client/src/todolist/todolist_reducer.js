@@ -5,14 +5,14 @@ const todoList = (
 	action
 ) => {
 	switch (action.type) {
-		case 'RESPONSE_FETCH_TODOS':
+		case 'TODOLIST::RESPONSE_FETCH_TODOS':
 			return action.todos;
-		case 'RESPONSE_ADD_TODO':
+		case 'TODOLIST::RESPONSE_ADD_TODO':
 			return [ ...state, action.todo ];
-		case 'RESPONSE_REMOVE_TODO':
+		case 'TODOLIST::RESPONSE_REMOVE_TODO':
 			const idx = state.findIndex((t) => t.id === action.id);
 			return [ ...state.slice(0, idx), ...state.slice(idx+1) ];
-		case 'RESPONSE_UPDATE_TODO':
+		case 'TODOLIST::RESPONSE_UPDATE_TODO':
 			return state.map((t) => t.id === action.todo.id ? action.todo : t);
 		default:
 			return state;
@@ -24,7 +24,7 @@ const todoFilter = (
 	action
 ) => {
 	switch (action.type) {
-		case 'SET_TODO_FILTER':
+		case 'TODOLIST::SET_TODO_FILTER':
 			return action.filter;
 		default:
 			return state;
@@ -36,15 +36,15 @@ const isFetching = (
 	action
 ) => {
 	switch (action.type) {
-		case 'REQUEST_FETCH_TODOS':
-		case 'REQUEST_ADD_TODO':
-		case 'REQUEST_REMOVE_TODO':
-		case 'REQUEST_UPDATE_TODO':
+		case 'TODOLIST::REQUEST_FETCH_TODOS':
+		case 'TODOLIST::REQUEST_ADD_TODO':
+		case 'TODOLIST::REQUEST_REMOVE_TODO':
+		case 'TODOLIST::REQUEST_UPDATE_TODO':
 			return true;
-		case 'RESPONSE_FETCH_TODOS':
-		case 'RESPONSE_ADD_TODO':
-		case 'RESPONSE_REMOVE_TODO':
-		case 'RESPONSE_UPDATE_TODO':
+		case 'TODOLIST::RESPONSE_FETCH_TODOS':
+		case 'TODOLIST::RESPONSE_ADD_TODO':
+		case 'TODOLIST::RESPONSE_REMOVE_TODO':
+		case 'TODOLIST::RESPONSE_UPDATE_TODO':
 			return false;
 		default:
 			return state;
