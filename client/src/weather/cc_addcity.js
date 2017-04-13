@@ -17,7 +17,7 @@ const AddCity = (props) => {
 		} }>
 			<InputGroup>
 				<InputGroupAddon> <i className="fa fa-globe"></i> </InputGroupAddon>
-				<Input type="text" getRef={ (el) => textInput = el } name="cityname" id="cityname" placeholder="City name" />
+				<Input type="text" getRef={ (el) => textInput = el } name="cityname" id="cityname" placeholder="City name" autoFocus />
 				{ !props.isFetching &&
 					<InputGroupButton color="primary"> Add </InputGroupButton>
 				}

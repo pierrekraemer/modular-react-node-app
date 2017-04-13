@@ -17,7 +17,7 @@ const AddTodo = (props) => {
 		} }>
 			<InputGroup>
 				<InputGroupAddon> <i className="fa fa-pencil"></i> </InputGroupAddon>
-				<Input type="text" getRef={ (el) => textInput = el } name="todotext" id="todotext" placeholder="Todo text" />
+				<Input type="text" getRef={ (el) => textInput = el } name="todotext" id="todotext" placeholder="Todo text" autoFocus />
 				<InputGroupButton color="primary"> Add </InputGroupButton>
 			</InputGroup>
 		</Form>

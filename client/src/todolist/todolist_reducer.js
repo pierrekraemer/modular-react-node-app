@@ -14,6 +14,8 @@ const todoList = (
 			return [ ...state.slice(0, idx), ...state.slice(idx+1) ];
 		case 'TODOLIST::RESPONSE_UPDATE_TODO':
 			return state.map((t) => t.id === action.todo.id ? action.todo : t);
+		case 'USER::SIGNOUT':
+			return [];
 		default:
 			return state;
 	}

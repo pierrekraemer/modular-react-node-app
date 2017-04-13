@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Button, Col, Form, FormGroup, FormFeedback, InputGroup, InputGroupAddon, Input } from 'reactstrap';
 
-import { signin } from './user_actions';
+import { signup } from './user_actions';
 
-const UserSignin = (props) => Object.assign(
+const UserSignup = (props) => Object.assign(
 	Object.create(React.Component.prototype),
 	{
 		props,
@@ -14,6 +14,7 @@ const UserSignin = (props) => Object.assign(
 		state: {
 			username: '',
 			password: '',
+			passwordConfirm: '',
 			message: ''
 		},
 
@@ -23,17 +24,25 @@ const UserSignin = (props) => Object.assign(
 
 		handleSubmit (event) {
 			event.preventDefault();
-			props.onSubmit({
-				username: this.state.username,
-				password: this.state.password
-			})
-			.then(() => props.history.push('/'))
-			.catch((err) => {
+			if (this.state.password !== this.state.passwordConfirm) {
 				this.setState({
-					password: '',
-					message: err.message
+					message: 'Password confirmation is not equal to password'
 				});
-			});
+			} else {
+				props.onSubmit({
+					username: this.state.username,
+					password: this.state.password
+				})
+				.then(() => props.history.push('/signin'))
+				.catch((err) => {
+					this.setState({
+						username: '',
+						password: '',
+						passwordConfirm: '',
+						message: err.message
+					});
+				});
+			}
 		},
 
 		render() {
@@ -53,8 +62,14 @@ const UserSignin = (props) => Object.assign(
 							</InputGroup>
 						</FormGroup>
 						<FormGroup row>
+							<InputGroup>
+								<InputGroupAddon> <i className="fa fa-key"></i> </InputGroupAddon>
+								<Input type="password" value={ this.state.passwordConfirm } onChange={ (e) => this.handleChange(e, 'passwordConfirm') } name="passwordconfirm" id="passwordconfirm" placeholder="Password confirmation" />
+							</InputGroup>
+						</FormGroup>
+						<FormGroup row>
 							<Button color="primary">
-								<i className="fa fa-sign-in"></i> Signin
+								<i className="fa fa-sign-in"></i> Signup
 							</Button>
 						</FormGroup>
 						<FormGroup color="danger">
@@ -62,12 +77,12 @@ const UserSignin = (props) => Object.assign(
 						</FormGroup>
 					</Form>
 				</Col>
-			);
+			)
 		}
 	}
 );
 
-UserSignin.propTypes = {
+UserSignup.propTypes = {
 	onSubmit: PropTypes.func.isRequired,
 	history: PropTypes.object.isRequired
 };
@@ -75,6 +90,6 @@ UserSignin.propTypes = {
 export default connect(
 	null,
 	(dispatch) => ({
-		onSubmit: (credentials) => dispatch(signin(credentials))
+		onSubmit: (credentials) => dispatch(signup(credentials))
 	})
-)(withRouter(UserSignin));
+)(withRouter(UserSignup));

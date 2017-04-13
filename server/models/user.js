@@ -21,7 +21,7 @@ module.exports = function (sequelize, DataTypes) {
 					if (Array.isArray(value)) {
 						this.setDataValue('roles', value.join(','));
 					} else {
-						this.setDataValue('roles', [ value ]);
+						this.setDataValue('roles', value);
 					}
 				}
 			}
@@ -43,7 +43,7 @@ module.exports = function (sequelize, DataTypes) {
 			},
 			instanceMethods: {
 				toJSON: function () {
-					const data = Object.assign({}, this.dataValues);
+					const data = Object.assign({}, this.get());
 					delete data.password;
 					return data;
 				},

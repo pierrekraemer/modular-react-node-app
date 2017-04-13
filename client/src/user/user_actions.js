@@ -31,6 +31,15 @@ const resSignin = (user) => ({
 	user
 });
 
+export const signup = (credentials) => (dispatch) => {
+	return fetch('/api/user/signup', {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify(credentials)
+	})
+	.then(checkStatus);
+};
+
 export const signout = () => {
 	window.localStorage.removeItem('token');
 	return {

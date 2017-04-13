@@ -17,6 +17,15 @@ module.exports = {
 			]
 		},
 		{
+			path: '/signup',
+			usage: [
+				{
+					verb: 'post',
+					func: userCtrl.signup
+				}
+			]
+		},
+		{
 			path: '/whoami',
 			usage: [
 				{

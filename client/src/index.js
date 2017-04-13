@@ -10,7 +10,7 @@ import thunkMiddleware from 'redux-thunk';
 
 import { HashRouter } from 'react-router-dom';
 
-import App from './cc_app';
+import App from './common/cc_app';
 
 import user from './user/user_reducer';
 import weather from './weather/weather_reducer';
