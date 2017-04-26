@@ -37,6 +37,14 @@ const UserSignin = (props) => Object.assign(
 		},
 
 		render() {
+			let message = null;
+			if (this.state.message !== '') {
+				message = (
+					<FormGroup color="danger">
+						<FormFeedback> { this.state.message } </FormFeedback>
+					</FormGroup>
+				);
+			}
 			return (
 				<Col sm="12" md={{ size: 6, offset: 3 }}>
 					<Form onSubmit={ (e) => this.handleSubmit(e) }>
@@ -57,9 +65,7 @@ const UserSignin = (props) => Object.assign(
 								<i className="fa fa-sign-in"></i> Signin
 							</Button>
 						</FormGroup>
-						<FormGroup color="danger">
-							<FormFeedback> { this.state.message } </FormFeedback>
-						</FormGroup>
+						{ message }
 					</Form>
 				</Col>
 			);

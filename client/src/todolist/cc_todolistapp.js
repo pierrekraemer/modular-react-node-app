@@ -16,7 +16,7 @@ const TodoApp = () => ({
 
 	render() {
 		return (
-			<Col sm="12" md={{ size: 8, offset: 2 }}>
+			<Col sm={12} md={{ size: 8, offset: 2 }}>
 				<AddTodo />
 				<FilterSelector />
 				<TodoList />
