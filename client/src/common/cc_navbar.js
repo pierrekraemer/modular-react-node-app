@@ -25,6 +25,10 @@ const NavBar = (props) => (
 	</Navbar>
 );
 
+NavBar.propTypes = {
+	user: PropTypes.object
+};
+
 export default connect(
 	(state) => ({
 		user: state.user

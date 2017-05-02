@@ -9,9 +9,9 @@ import AddTodo from './cc_addtodo';
 
 import { fetchTodos } from './todolist_actions';
 
-const TodoApp = () => ({
+const TodoApp = (props) => ({
 	componentDidMount() {
-		this.props.fetchTodos();
+		props.fetchTodos();
 	},
 
 	render() {

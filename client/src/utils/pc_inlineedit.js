@@ -1,43 +1,42 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const InlineEdit = (props) => Object.assign(
-	Object.create(React.Component.prototype),
-	{
-		props,
+const InlineEdit = (props) => {
+	let textInput;
 
+	const comp = Object.create(React.Component.prototype);
+
+	const toggleEdit = (event) => {
+		comp.setState({ editing: true });
+	};
+
+	const handleChange = (event) => {
+		comp.setState({ text: event.target.value });
+	};
+
+	const handleKeyUp = (event) => {
+		if (event.keyCode === 13) {
+			handleBlur();
+		}
+	};
+
+	const handleBlur = () => {
+		comp.setState({ editing: false });
+		props.onEdited(comp.state.text)
+		.then(() => comp.setState({ lastSave: comp.state.text }))
+		.catch(() => comp.setState({ text: comp.state.lastSave }));
+	};
+
+	return Object.assign(comp, {
 		state: {
 			text: props.text,
 			lastSave: props.text,
 			editing: false
 		},
 
-		toggleEdit(event) {
-			this.setState({ editing: true });
-		},
-
-		handleChange(event) {
-			this.setState({ text: event.target.value });
-		},
-
-		handleKeyUp(event) {
-			if (event.keyCode === 13) {
-				this.handleBlur();
-			}
-		},
-
-		handleBlur() {
-			this.setState({ editing: false });
-			this.props.onEdited(this.state.text)
-			.then(() => this.setState({ lastSave: this.state.text }))
-			.catch((err) => {
-				this.setState({ text: this.state.lastSave });
-			});
-		},
-
 		componentDidUpdate(prevProps, prevState) {
 			if (this.state.editing && !prevState.editing) {
-				this.textInput.focus();
+				textInput.focus();
 			}
 		},
 
@@ -45,10 +44,10 @@ const InlineEdit = (props) => Object.assign(
 			if (this.state.editing) {
 				return (
 					<input type="text" value={ this.state.text }
-						ref={ (input) => this.textInput = input }
-						onChange={ (e) => this.handleChange(e) }
-						onKeyUp={ (e) => this.handleKeyUp(e) }
-						onBlur={ () => this.handleBlur() }
+						ref={ (elem) => textInput = elem }
+						onChange={ handleChange }
+						onKeyUp={ handleKeyUp }
+						onBlur={ handleBlur }
 					/>
 				);
 			} else {
@@ -56,14 +55,14 @@ const InlineEdit = (props) => Object.assign(
 					<span>
 						{ this.state.text }
 						<a href="" className="btn btn-small text-warning" onClick={
-							(e) => { e.preventDefault(); this.toggleEdit(e); }
+							(e) => { e.preventDefault(); toggleEdit(e); }
 						}> <i className="fa fa-pencil"></i> </a>
 					</span>
 				);
 			}
 		}
-	}
-);
+	});
+};
 
 InlineEdit.propTypes = {
 	text: PropTypes.string.isRequired,

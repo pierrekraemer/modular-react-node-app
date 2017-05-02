@@ -6,9 +6,38 @@ import { Button, Col, Form, FormGroup, FormFeedback, InputGroup, InputGroupAddon
 
 import { signup } from './user_actions';
 
-const UserSignup = (props) => Object.assign(
-	Object.create(React.Component.prototype),
-	{
+const UserSignup = (props) => {
+	
+	const comp = Object.create(React.Component.prototype);
+
+	const handleChange = (event, elem) => {
+		comp.setState({ [elem]: event.target.value });
+	};
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		if (comp.state.password !== comp.state.passwordConfirm) {
+			comp.setState({
+				message: 'Password confirmation is not equal to password'
+			});
+		} else {
+			comp.props.onSubmit({
+				username: comp.state.username,
+				password: comp.state.password
+			})
+			.then(() => comp.props.history.push('/signin'))
+			.catch((err) => {
+				comp.setState({
+					username: '',
+					password: '',
+					passwordConfirm: '',
+					message: err.message
+				});
+			});
+		}
+	};
+	
+	return Object.assign(comp, {
 		props,
 
 		state: {
@@ -18,53 +47,34 @@ const UserSignup = (props) => Object.assign(
 			message: ''
 		},
 
-		handleChange (event, elem) {
-			this.setState({ [elem]: event.target.value });
-		},
-
-		handleSubmit (event) {
-			event.preventDefault();
-			if (this.state.password !== this.state.passwordConfirm) {
-				this.setState({
-					message: 'Password confirmation is not equal to password'
-				});
-			} else {
-				props.onSubmit({
-					username: this.state.username,
-					password: this.state.password
-				})
-				.then(() => props.history.push('/signin'))
-				.catch((err) => {
-					this.setState({
-						username: '',
-						password: '',
-						passwordConfirm: '',
-						message: err.message
-					});
-				});
-			}
-		},
-
 		render() {
+			let message = null;
+			if (this.state.message !== '') {
+				message = (
+					<FormGroup color="danger">
+						<FormFeedback> { this.state.message } </FormFeedback>
+					</FormGroup>
+				);
+			}
 			return (
 				<Col sm="12" md={{ size: 6, offset: 3 }}>
-					<Form onSubmit={ (e) => this.handleSubmit(e) }>
+					<Form onSubmit={ handleSubmit }>
 						<FormGroup row>
 							<InputGroup>
 								<InputGroupAddon> <i className="fa fa-user"></i> </InputGroupAddon>
-								<Input type="text" value={ this.state.username } onChange={ (e) => this.handleChange(e, 'username') } name="username" id="username" placeholder="Username" autoFocus />
+								<Input type="text" value={ this.state.username } onChange={ (e) => handleChange(e, 'username') } name="username" id="username" placeholder="Username" autoFocus />
 							</InputGroup>
 						</FormGroup>
 						<FormGroup row>
 							<InputGroup>
 								<InputGroupAddon> <i className="fa fa-key"></i> </InputGroupAddon>
-								<Input type="password" value={ this.state.password } onChange={ (e) => this.handleChange(e, 'password') } name="password" id="password" placeholder="Password" />
+								<Input type="password" value={ this.state.password } onChange={ (e) => handleChange(e, 'password') } name="password" id="password" placeholder="Password" />
 							</InputGroup>
 						</FormGroup>
 						<FormGroup row>
 							<InputGroup>
 								<InputGroupAddon> <i className="fa fa-key"></i> </InputGroupAddon>
-								<Input type="password" value={ this.state.passwordConfirm } onChange={ (e) => this.handleChange(e, 'passwordConfirm') } name="passwordconfirm" id="passwordconfirm" placeholder="Password confirmation" />
+								<Input type="password" value={ this.state.passwordConfirm } onChange={ (e) => handleChange(e, 'passwordConfirm') } name="passwordconfirm" id="passwordconfirm" placeholder="Password confirmation" />
 							</InputGroup>
 						</FormGroup>
 						<FormGroup row>
@@ -72,15 +82,13 @@ const UserSignup = (props) => Object.assign(
 								<i className="fa fa-sign-in"></i> Signup
 							</Button>
 						</FormGroup>
-						<FormGroup color="danger">
-							<FormFeedback> { this.state.message } </FormFeedback>
-						</FormGroup>
+						{ message }
 					</Form>
 				</Col>
 			)
 		}
-	}
-);
+	});
+}
 
 UserSignup.propTypes = {
 	onSubmit: PropTypes.func.isRequired,

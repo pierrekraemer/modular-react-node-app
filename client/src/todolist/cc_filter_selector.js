@@ -5,30 +5,24 @@ import { Button, ButtonGroup, Badge } from 'reactstrap';
 
 import { todoFilters, setTodoFilter } from './todolist_actions';
 
-const FilterSelector = (props) => ({
-	props,
-
-	render () {
-		return (
-			<ButtonGroup className="mb-4">
-				{ this.props.options.map((option, index) => {
-					return (
-						<Button
-							key={ index }
-							color="primary"
-							active={ this.props.selected === option }
-							onClick={ () => this.props.onChange(option) }
-						>
-							{ option }
-							{ ' ' }
-							<Badge pill> { this.props.nb_todos[index] } </Badge>
-						</Button>
-					);
-				}) }
-			</ButtonGroup>
-		);
-	}
-});
+const FilterSelector = (props) => (
+	<ButtonGroup className="mb-4">
+		{ props.options.map((option, index) => {
+			return (
+				<Button
+					key={ index }
+					color="primary"
+					active={ props.selected === option }
+					onClick={ () => props.onChange(option) }
+				>
+					{ option }
+					{ ' ' }
+					<Badge pill> { props.nb_todos[index] } </Badge>
+				</Button>
+			);
+		}) }
+	</ButtonGroup>
+);
 
 FilterSelector.propTypes = {
 	options: PropTypes.arrayOf(PropTypes.string).isRequired,

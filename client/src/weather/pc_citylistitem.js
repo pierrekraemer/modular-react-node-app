@@ -7,47 +7,53 @@ import {
 	Modal, ModalHeader, ModalBody, ModalFooter
 } from 'reactstrap';
 
-const CityListItem = (props) => Object.assign(
-	Object.create(React.Component.prototype),
-	{
+const CityListItem = (props) => {
+	
+	const comp = Object.create(React.Component.prototype);
+
+	const onRemove = () => {
+		comp.setState({ confirmation_modal_open: true });
+	};
+
+	const confirmRemove = () => {
+		comp.setState({ confirmation_modal_open: false });
+		return comp.props.onRemove();
+	};
+
+	const dismissRemove = () => {
+		comp.setState({ confirmation_modal_open: false });
+	};
+	
+	return Object.assign(comp, {
 		props,
 
-		state: { modal_open: false },
-
-		on_remove: function () {
-			this.setState((prevState) => ({ modal_open: true }));
-		},
-
-		confirm_remove: function (b) {
-			this.setState((prevState) => ({ modal_open: false }));
-			if (b) {
-				this.props.onRemove();
-			}
+		state: {
+			confirmation_modal_open: false
 		},
 
 		render() {
 			return (
 				<ListGroupItem>
 					<Link className="col" to={ '/weather/' + this.props.city.id }> { this.props.city.name } </Link>
-					<Button outline color="primary" className="ml-auto" onClick={ () => this.props.onRefresh() }>
+					<Button outline color="primary" className="ml-auto" onClick={ this.props.onRefresh }>
 						<i className="fa fa-refresh"></i>
 					</Button>
-					<Button outline color="danger" className="ml-1" onClick={ () => this.on_remove() }>
+					<Button outline color="danger" className="ml-1" onClick={ onRemove }>
 						<i className="fa fa-times"></i>
 					</Button>
-					<Modal isOpen={ this.state.modal_open }>
+					<Modal isOpen={ this.state.confirmation_modal_open }>
 						<ModalHeader> Confirmation </ModalHeader>
 						<ModalBody> Are you sure you want to delete this city ? </ModalBody>
 						<ModalFooter>
-							<Button color="danger" onClick={ () => this.confirm_remove(true) }> Yes </Button>{' '}
-							<Button color="secondary" onClick={ () => this.confirm_remove(false) }> No </Button>
+							<Button color="danger" onClick={ confirmRemove }> Yes </Button>{' '}
+							<Button color="secondary" onClick={ dismissRemove }> No </Button>
 						</ModalFooter>
 					</Modal>
 				</ListGroupItem>
 			);
 		}
-	}
-);
+	});
+}
 
 CityListItem.propTypes = {
 	city: PropTypes.shape({

@@ -8,13 +8,15 @@ import { fetchCity } from './weather_actions';
 const AddCity = (props) => {
 
 	let textInput;
+
+	const handleSubmit = (event) => {
+		e.preventDefault();
+		props.onSubmit(textInput.value);
+		textInput.value = '';
+	}
 	
 	return (
-		<Form onSubmit={ (e) => {
-			e.preventDefault();
-			props.onSubmit(textInput.value);
-			textInput.value = '';
-		} }>
+		<Form onSubmit={ handleSubmit }>
 			<InputGroup>
 				<InputGroupAddon> <i className="fa fa-globe"></i> </InputGroupAddon>
 				<Input type="text" getRef={ (el) => textInput = el } name="cityname" id="cityname" placeholder="City name" autoFocus />

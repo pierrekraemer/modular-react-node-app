@@ -14,9 +14,8 @@ const TodoList = (props) => (
 				<TodoListItem
 					key={ todo.id }
 					{ ...todo }
+					onUpdate={ (changes) => props.onUpdateTodo(todo.id, changes) }
 					onRemove={ () => props.onRemoveTodo(todo.id) }
-					onToggleDone={ () => props.onUpdateTodo(todo.id, { done: !todo.done }) }
-					onUpdate={ (text) => props.onUpdateTodo(todo.id, { text }) }
 				/>
 			);
 		}) }

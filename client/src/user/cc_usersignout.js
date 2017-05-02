@@ -9,6 +9,7 @@ const UserSignout = (props) => ({
 	componentWillMount() {
 		props.signout();
 	},
+	
 	render() {
 		return (<Redirect to="/" />);
 	}
