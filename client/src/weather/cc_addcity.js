@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import { Form, InputGroup, InputGroupAddon, InputGroupButton, Input } from 'reactstrap';
 
 import { fetchCity } from './weather_actions';
@@ -10,37 +11,32 @@ const AddCity = (props) => {
 	let textInput;
 
 	const handleSubmit = (event) => {
-		e.preventDefault();
-		props.onSubmit(textInput.value);
-		textInput.value = '';
-	}
+		event.preventDefault();
+		props.onSubmit(textInput.value)
+		.then((res) => {
+			textInput.value = '';
+			props.history.push('/weather/' + res.cityWeather.id);
+		});
+	};
 	
 	return (
 		<Form onSubmit={ handleSubmit }>
 			<InputGroup>
 				<InputGroupAddon> <i className="fa fa-globe"></i> </InputGroupAddon>
 				<Input type="text" getRef={ (el) => textInput = el } name="cityname" id="cityname" placeholder="City name" autoFocus />
-				{ !props.isFetching &&
-					<InputGroupButton color="primary"> Add </InputGroupButton>
-				}
-				{ props.isFetching &&
-					<InputGroupAddon> <i className="fa fa-spinner fa-spin"></i> </InputGroupAddon>
-				}
+				<InputGroupButton color="primary"> Add </InputGroupButton>
 			</InputGroup>
 		</Form>
 	);
 };
 
 AddCity.propTypes = {
-	isFetching: PropTypes.bool.isRequired,
 	onSubmit: PropTypes.func.isRequired
 };
 
 export default connect(
-	(state) => ({
-		isFetching: state.weather.isFetching
-	}),
+	null,
 	(dispatch) => ({
 		onSubmit: (text) => dispatch(fetchCity(text))
 	})
-)(AddCity);
+)(withRouter(AddCity));

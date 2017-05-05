@@ -7,6 +7,7 @@ const InlineEdit = (props) => {
 	const comp = Object.create(React.Component.prototype);
 
 	const toggleEdit = (event) => {
+		event.preventDefault();
 		comp.setState({ editing: true });
 	};
 
@@ -54,9 +55,9 @@ const InlineEdit = (props) => {
 				return (
 					<span>
 						{ this.state.text }
-						<a href="" className="btn btn-small text-warning" onClick={
-							(e) => { e.preventDefault(); toggleEdit(e); }
-						}> <i className="fa fa-pencil"></i> </a>
+						<a href="" className="btn btn-small text-warning" onClick={ toggleEdit }>
+							<i className="fa fa-pencil"></i>
+						</a>
 					</span>
 				);
 			}

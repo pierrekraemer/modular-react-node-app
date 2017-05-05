@@ -33,8 +33,8 @@ const CityListItem = (props) => {
 
 		render() {
 			return (
-				<ListGroupItem>
-					<Link className="col" to={ '/weather/' + this.props.city.id }> { this.props.city.name } </Link>
+				<ListGroupItem color={ this.props.active ? 'info' : '' }>
+					<Link to={ '/weather/' + this.props.city.id } className="col" style={{ textDecoration: 'none' }}> { this.props.city.name } </Link>
 					<Button outline color="primary" className="ml-auto" onClick={ this.props.onRefresh }>
 						<i className="fa fa-refresh"></i>
 					</Button>
@@ -60,6 +60,7 @@ CityListItem.propTypes = {
 		id: PropTypes.number.isRequired,
 		name: PropTypes.string.isRequired
 	}).isRequired,
+	active: PropTypes.bool.isRequired,
 	onRefresh: PropTypes.func.isRequired,
 	onRemove: PropTypes.func.isRequired
 };

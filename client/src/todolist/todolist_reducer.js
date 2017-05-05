@@ -8,7 +8,7 @@ const todoList = (
 		case 'TODOLIST::RESPONSE_FETCH_TODOS':
 			return action.todos;
 		case 'TODOLIST::RESPONSE_ADD_TODO':
-			return [ ...state, action.todo ];
+			return [ action.todo, ...state ];
 		case 'TODOLIST::RESPONSE_REMOVE_TODO':
 			const idx = state.findIndex((t) => t.id === action.id);
 			return [ ...state.slice(0, idx), ...state.slice(idx+1) ];

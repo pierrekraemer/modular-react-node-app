@@ -8,13 +8,15 @@ import { addTodo } from './todolist_actions';
 const AddTodo = (props) => {
 
 	let textInput;
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		props.onSubmit(textInput.value)
+		.then(() => textInput.value = '');
+	};
 	
 	return (
-		<Form className="mb-4" onSubmit={ (e) => {
-			e.preventDefault();
-			props.onSubmit(textInput.value);
-			textInput.value = '';
-		} }>
+		<Form className="mb-4" onSubmit={ handleSubmit }>
 			<InputGroup>
 				<InputGroupAddon> <i className="fa fa-pencil"></i> </InputGroupAddon>
 				<Input type="text" getRef={ (el) => textInput = el } name="todotext" id="todotext" placeholder="Todo text" autoFocus />

@@ -9,16 +9,14 @@ import { removeTodo, updateTodo } from './todolist_actions';
 
 const TodoList = (props) => (
 	<ListGroup>
-		{ props.todos.map((todo) => {
-			return (
-				<TodoListItem
-					key={ todo.id }
-					{ ...todo }
-					onUpdate={ (changes) => props.onUpdateTodo(todo.id, changes) }
-					onRemove={ () => props.onRemoveTodo(todo.id) }
-				/>
-			);
-		}) }
+		{ props.todos.map((todo) => (
+			<TodoListItem
+				key={ todo.id }
+				{ ...todo }
+				onUpdate={ (changes) => props.onUpdateTodo(todo.id, changes) }
+				onRemove={ () => props.onRemoveTodo(todo.id) }
+			/>
+		)) }
 	</ListGroup>
 );
 

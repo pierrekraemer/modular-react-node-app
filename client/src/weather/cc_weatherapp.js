@@ -20,6 +20,7 @@ const WeatherApp = (props) => (
 				<Button color="primary" onClick={ props.onRefreshAll }>
 					<i className="fa fa-refresh"></i> Refresh all
 				</Button>
+				{ props.isFetching && <i className="ml-1 fa fa-spinner fa-spin"></i> }
 			</Col>
 		</Row>
 		<Row>
@@ -34,11 +35,14 @@ const WeatherApp = (props) => (
 );
 
 WeatherApp.propTypes = {
+	isFetching: PropTypes.bool.isRequired,
 	onRefreshAll: PropTypes.func.isRequired
 };
 
 export default connect(
-	null,
+	(state) => ({
+		isFetching: state.weather.isFetching
+	}),
 	(dispatch) => ({
 		onRefreshAll: () => dispatch(fetchAll())
 	})
