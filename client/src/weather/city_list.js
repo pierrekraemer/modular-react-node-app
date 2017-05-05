@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { withRouter, matchPath } from 'react-router-dom';
 import { ListGroup } from 'reactstrap';
 
-import CityListItem from './pc_citylistitem';
+import CityListItem from './city_list_item';
 
-import { fetchCity, removeCity } from './weather_actions';
+import { fetchCity, removeCity } from './actions';
 
 const CityList = (props) => (
 	<ListGroup>

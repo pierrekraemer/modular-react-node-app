@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Form, InputGroup, InputGroupAddon, InputGroupButton, Input } from 'reactstrap';
 
-import { fetchCity } from './weather_actions';
+import { fetchCity } from './actions';
 
 const AddCity = (props) => {
 

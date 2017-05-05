@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Col } from 'reactstrap';
 
-import FilterSelector from './cc_filter_selector';
-import TodoList from './cc_todolist';
-import AddTodo from './cc_addtodo';
+import FilterSelector from './filter_selector';
+import TodoList from './todo_list';
+import AddTodo from './add_todo';
 
-import { fetchTodos } from './todolist_actions';
+import { fetchTodos } from './actions';
 
 const TodoApp = (props) => ({
 	componentWillMount() {

@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import { Route, withRouter } from 'react-router-dom';
 import { Row, Col, Button } from 'reactstrap';
 
-import AddCity from './cc_addcity';
-import CityList from './cc_citylist';
-import CityDetail from './cc_citydetail';
+import AddCity from './add_city';
+import CityList from './city_list';
+import CityDetail from './city_detail';
 
-import { fetchAll } from './weather_actions';
+import { fetchAll } from './actions';
 
 const WeatherApp = (props) => (
 	<Col sm={12} md={{ size: 8, offset: 2 }}>

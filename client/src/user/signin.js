@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Button, Col, Form, FormGroup, FormFeedback, InputGroup, InputGroupAddon, Input } from 'reactstrap';
 
-import { signup } from './user_actions';
+import { signin } from './actions';
 
-const UserSignup = (props) => {
+const UserSignin = (props) => {
 	
 	const comp = Object.create(React.Component.prototype);
 
@@ -16,25 +16,17 @@ const UserSignup = (props) => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		if (comp.state.password !== comp.state.passwordConfirm) {
+		comp.props.onSubmit({
+			username: comp.state.username,
+			password: comp.state.password
+		})
+		.then(() => comp.props.history.push('/'))
+		.catch((err) => {
 			comp.setState({
-				message: 'Password confirmation is not equal to password'
+				password: '',
+				message: err.message
 			});
-		} else {
-			comp.props.onSubmit({
-				username: comp.state.username,
-				password: comp.state.password
-			})
-			.then(() => comp.props.history.push('/signin'))
-			.catch((err) => {
-				comp.setState({
-					username: '',
-					password: '',
-					passwordConfirm: '',
-					message: err.message
-				});
-			});
-		}
+		});
 	};
 	
 	return Object.assign(comp, {
@@ -43,7 +35,6 @@ const UserSignup = (props) => {
 		state: {
 			username: '',
 			password: '',
-			passwordConfirm: '',
 			message: ''
 		},
 
@@ -72,25 +63,19 @@ const UserSignup = (props) => {
 							</InputGroup>
 						</FormGroup>
 						<FormGroup row>
-							<InputGroup>
-								<InputGroupAddon> <i className="fa fa-key"></i> </InputGroupAddon>
-								<Input type="password" value={ this.state.passwordConfirm } onChange={ (e) => handleChange(e, 'passwordConfirm') } name="passwordconfirm" id="passwordconfirm" placeholder="Password confirmation" />
-							</InputGroup>
-						</FormGroup>
-						<FormGroup row>
 							<Button color="primary">
-								<i className="fa fa-sign-in"></i> Signup
+								<i className="fa fa-sign-in"></i> Signin
 							</Button>
 						</FormGroup>
 						{ message }
 					</Form>
 				</Col>
-			)
+			);
 		}
 	});
 }
 
-UserSignup.propTypes = {
+UserSignin.propTypes = {
 	onSubmit: PropTypes.func.isRequired,
 	history: PropTypes.object.isRequired
 };
@@ -98,6 +83,6 @@ UserSignup.propTypes = {
 export default connect(
 	null,
 	(dispatch) => ({
-		onSubmit: (credentials) => dispatch(signup(credentials))
+		onSubmit: (credentials) => dispatch(signin(credentials))
 	})
-)(withRouter(UserSignup));
+)(withRouter(UserSignin));

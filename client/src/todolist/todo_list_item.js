@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { ListGroupItem, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-import InlineEdit from '../utils/pc_inlineedit';
+import InlineEdit from '../utils/inline_edit';
 
 const TodoListItem = (props) => {
 

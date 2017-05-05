@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Route, withRouter } from 'react-router-dom';
 
-import { whoami } from '../user/user_actions';
+import { whoami } from './user/actions';
 
-import NavBar from './cc_navbar';
+import NavBar from './nav/navbar';
 
-import WeatherApp from '../weather/cc_weatherapp';
-import TodoListApp from '../todolist/cc_todolistapp';
-import UserSignin from '../user/cc_usersignin';
-import UserSignup from '../user/cc_usersignup';
-import UserSignout from '../user/cc_usersignout';
+import WeatherApp from './weather/app';
+import TodoListApp from './todolist/app';
+import UserSignin from './user/signin';
+import UserSignup from './user/signup';
+import UserSignout from './user/signout';
 
 const App = (props) => ({
 	componentWillMount() {

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { ListGroup } from 'reactstrap';
 
-import TodoListItem from './pc_todolistitem';
+import TodoListItem from './todo_list_item';
 
-import { removeTodo, updateTodo } from './todolist_actions';
+import { removeTodo, updateTodo } from './actions';
 
 const TodoList = (props) => (
 	<ListGroup>

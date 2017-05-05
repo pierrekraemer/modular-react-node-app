@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button, ButtonGroup, Badge } from 'reactstrap';
 
-import { todoFilters, setTodoFilter } from './todolist_actions';
+import { todoFilters, setTodoFilter } from './actions';
 
 const FilterSelector = (props) => (
 	<ButtonGroup className="mb-4">

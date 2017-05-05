@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button, Form, InputGroup, InputGroupAddon, InputGroupButton, Input } from 'reactstrap';
 
-import { addTodo } from './todolist_actions';
+import { addTodo } from './actions';
 
 const AddTodo = (props) => {
 

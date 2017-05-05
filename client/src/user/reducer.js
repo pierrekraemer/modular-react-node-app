@@ -1,3 +1,4 @@
+
 const User = {
 	hasRole(roles) {
 		if (Array.isArray(roles)) {
