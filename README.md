@@ -14,26 +14,26 @@ Build & watch tasks are provided through npm scripts.
 ```
 client/
   |-src/
-  |  |-index.html                --> main html structure
-  |  |-index.js                  --> redux store creation + main react renderDOM call
-  |  |-app.js                    --> root component
+  |  |-index.html            --> main html structure
+  |  |-index.js              --> redux store creation + main react renderDOM call
+  |  |-app.js                --> root component
   |  |-nav/
-  |  |  |-navbar.js              --> navbar component
+  |  |  |-navbar.js          --> navbar component
   |  |  |-...
   |  |-todolist/
-  |  |  |-actions.js             --> actions of the todolist app
-  |  |  |-reducer.js             --> reducer of the todolist app
-  |  |  |-app.js                 --> main component of the todolist app
-  |  |  |-todo_list.js           --> todo list component
-  |  |  |-...                    --> other components
+  |  |  |-actions.js         --> actions of the todolist app
+  |  |  |-reducer.js         --> reducer of the todolist app
+  |  |  |-app.js             --> main component of the todolist app
+  |  |  |-todo_list.js       --> todo list component
+  |  |  |-...                --> other components
   |  |-user/
-  |  |  |-actions.js             --> actions of the user management
-  |  |  |-reducer.js             --> reducer of the user management
-  |  |  |-signin.js              --> signin component
-  |  |  |-...                    --> other components
+  |  |  |-actions.js         --> actions of the user management
+  |  |  |-reducer.js         --> reducer of the user management
+  |  |  |-signin.js          --> signin component
+  |  |  |-...                --> other components
   |  |-...
-  |-package.json                 --> description of dependencies + build & watch scripts
-  |-webpack.config.js            --> webpack config file
+  |-package.json             --> description of dependencies + build & watch scripts
+  |-webpack.config.js        --> webpack config file
 ```
 
 ### Server side
@@ -48,11 +48,11 @@ server/
   |-controllers/       --> controllers
   |  |-user.js
   |  |-...
-  |-models/            --> models
+  |-models/            --> models definition
   |  |-index.js
   |  |-user.js
   |  |-...
-  |-routes/            --> routes
+  |-routes/            --> routes description
   |  |-index.js
   |  |-user.js
   |  |-...
@@ -82,6 +82,8 @@ public/
 ```
 
 ### Server side
+
+The configuration of the database connection is done in `server/models/index.js`.
 
 ```sh
 cd server
