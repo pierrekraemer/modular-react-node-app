@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter, matchPath, Link } from 'react-router-dom';
+import { withRouter, matchPath } from 'react-router-dom';
 import { ListGroup } from 'reactstrap';
 
 import CityListItem from './pc_citylistitem';
