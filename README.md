@@ -16,17 +16,20 @@ client/
   |-src/
   |  |-index.html                --> main html structure
   |  |-index.js                  --> redux store creation + main react renderDOM call
-  |  |-common/
-  |  |  |-app.js                 --> root component
+  |  |-app.js                    --> root component
+  |  |-nav/
   |  |  |-navbar.js              --> navbar component
+  |  |  |-...
   |  |-todolist/
-  |  |  |-todolist_actions.js    --> actions of the todolist app
-  |  |  |-todolist_reducer.js    --> reducer of the todolist app
-  |  |  |-todolistapp.js         --> main component of the todolist app
+  |  |  |-actions.js             --> actions of the todolist app
+  |  |  |-reducer.js             --> reducer of the todolist app
+  |  |  |-app.js                 --> main component of the todolist app
+  |  |  |-todo_list.js           --> todo list component
   |  |  |-...                    --> other components
   |  |-user/
-  |  |  |-user_actions.js        --> actions of the user management
-  |  |  |-user_reducer.js        --> reducer of the user management
+  |  |  |-actions.js             --> actions of the user management
+  |  |  |-reducer.js             --> reducer of the user management
+  |  |  |-signin.js              --> signin component
   |  |  |-...                    --> other components
   |  |-...
   |-package.json                 --> description of dependencies + build & watch scripts
