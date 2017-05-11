@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter, matchPath } from 'react-router-dom';
 import { ListGroup } from 'reactstrap';
 
 import CityListItem from './city_list_item';
@@ -34,13 +33,13 @@ CityList.propTypes = {
 	currentCityId: PropTypes.number
 };
 
-export default withRouter(connect(
+export default connect(
 	(state, ownProps) => ({
 		cities: state.weather.cities,
-		currentCityId: parseInt(matchPath(ownProps.location.pathname, { path: '/weather/:city_id?' }).params.city_id)
+		currentCityId: parseInt(ownProps.match.params.city_id)
 	}),
 	(dispatch) => ({
 		onRefreshCity: (cityName) => dispatch(fetchCity(cityName)),
 		onRemoveCity: (cityId) => dispatch(removeCity(cityId))
 	})
-)(CityList));
+)(CityList);

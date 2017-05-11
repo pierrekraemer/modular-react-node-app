@@ -25,7 +25,7 @@ const WeatherApp = (props) => (
 		</Row>
 		<Row>
 			<Col sm={5}>
-				<CityList />
+				<Route path="/weather/:city_id?" component={ CityList } />
 			</Col>
 			<Col sm={7}>
 				<Route path="/weather/:city_id" component={ CityDetail } />
