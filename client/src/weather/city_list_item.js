@@ -11,7 +11,7 @@ const CityListItem = (props) => {
 	
 	const comp = Object.create(React.Component.prototype);
 
-	const onRemove = () => {
+	const handleRemove = () => {
 		comp.setState({ confirmation_modal_open: true });
 	};
 
@@ -38,12 +38,12 @@ const CityListItem = (props) => {
 					<Button outline color="primary" className="ml-auto" onClick={ this.props.onRefresh }>
 						<i className="fa fa-refresh"></i>
 					</Button>
-					<Button outline color="danger" className="ml-1" onClick={ onRemove }>
+					<Button outline color="danger" className="ml-1" onClick={ handleRemove }>
 						<i className="fa fa-times"></i>
 					</Button>
 					<Modal isOpen={ this.state.confirmation_modal_open }>
 						<ModalHeader> Confirmation </ModalHeader>
-						<ModalBody> Are you sure you want to delete this city ? </ModalBody>
+						<ModalBody> Are you sure you want to delete this city ({ this.props.city.name }) ? </ModalBody>
 						<ModalFooter>
 							<Button color="danger" onClick={ confirmRemove }> Yes </Button>{' '}
 							<Button color="secondary" onClick={ dismissRemove }> No </Button>
@@ -53,7 +53,7 @@ const CityListItem = (props) => {
 			);
 		}
 	});
-}
+};
 
 CityListItem.propTypes = {
 	city: PropTypes.shape({

@@ -88,7 +88,7 @@ const UserSignup = (props) => {
 			)
 		}
 	});
-}
+};
 
 UserSignup.propTypes = {
 	onSubmit: PropTypes.func.isRequired,

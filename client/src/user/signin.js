@@ -73,7 +73,7 @@ const UserSignin = (props) => {
 			);
 		}
 	});
-}
+};
 
 UserSignin.propTypes = {
 	onSubmit: PropTypes.func.isRequired,

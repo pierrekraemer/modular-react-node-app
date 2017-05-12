@@ -75,7 +75,7 @@ const TodoListItem = (props) => {
 			);
 		}
 	});
-}
+};
 
 TodoListItem.propTypes = {
 	text: PropTypes.string.isRequired,

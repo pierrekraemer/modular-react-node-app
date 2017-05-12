@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Route, withRouter } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { Row, Col, Button } from 'reactstrap';
 
 import AddCity from './add_city';
