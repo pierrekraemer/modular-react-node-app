@@ -14,8 +14,10 @@ import UserSignup from './user/signup';
 import UserSignout from './user/signout';
 
 const App = (props) => ({
+	props,
+
 	componentWillMount() {
-		props.whoami();
+		this.props.whoami();
 	},
 
 	render() {

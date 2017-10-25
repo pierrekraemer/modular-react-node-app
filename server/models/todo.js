@@ -7,17 +7,12 @@ module.exports = function (sequelize, DataTypes) {
 		{
 			text: { type: DataTypes.STRING },
 			done: { type: DataTypes.BOOLEAN, defaultValue: false }
-		},
-		{
-			// underscored: true,
-			classMethods: {
-				associate: function (db) {
-					Todo.belongsTo(db.User);
-				}
-			},
-			instanceMethods: {}
 		}
 	);
+
+	Todo.associate = function (db) {
+		Todo.belongsTo(db.User);
+	};
 
 	return Todo;
 

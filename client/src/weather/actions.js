@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch';
+import 'whatwg-fetch';
 import { checkStatus } from '../utils/fetch_utils';
 
 export const fetchCity = (cityName) => (dispatch) => {

@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch';
+import 'whatwg-fetch';
 import { checkStatus, authorization } from '../utils/fetch_utils';
 
 export const fetchTodos = () => (dispatch) => {

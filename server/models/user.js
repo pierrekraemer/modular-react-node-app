@@ -27,36 +27,40 @@ module.exports = function (sequelize, DataTypes) {
 			}
 		},
 		{
-			// underscored: true,
-			classMethods: {
-				associate: function (db) {
-					User.hasMany(db.Todo);
-					// User_.belongsToMany(models.OtherModel);
-				},
-				generateHash: (password) => bcrypt.hashSync(password, 10),
-				roles: () => (
-					{
-						admin: 'admin',
-						user: 'user'
-					}
-				)
-			},
-			instanceMethods: {
-				toJSON: function () {
-					const data = Object.assign({}, this.get());
-					delete data.password;
-					return data;
-				},
-				validatePassword: function (password) { return bcrypt.compareSync(password, this.password); },
-				hasRole: function (role) { return this.roles.includes(role); },
-				addRole: function (role) {
-					if (!this.roles.includes(role)) {
-						this.roles.push(role);
-					}
-				}
-			}
+			// underscored: true
 		}
 	);
+
+	User.associate = function (db) {
+		User.hasMany(db.Todo);
+	};
+
+	User.generateHash = (password) => bcrypt.hashSync(password, 10);
+
+	User.roles = () => ({
+		admin: 'admin',
+		user: 'user'
+	});
+
+	User.prototype.toJSON = function () {
+		const data = Object.assign({}, this.get());
+		delete data.password;
+		return data;
+	};
+
+	User.prototype.validatePassword = function (password) {
+		return bcrypt.compareSync(password, this.password);
+	};
+
+	User.prototype.hasRole = function (role) {
+		return this.roles.includes(role);
+	};
+
+	User.prototype.addRole = function (role) {
+		if (!this.roles.includes(role)) {
+			this.roles.push(role);
+		}
+	};
 
 	return User;
 
