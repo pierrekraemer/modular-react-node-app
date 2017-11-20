@@ -6,28 +6,32 @@ import { Button, Col, Form, FormGroup, FormFeedback, InputGroup, InputGroupAddon
 
 import { signup } from './actions';
 
-const UserSignup = (props) => {
-	
-	const comp = Object.create(React.Component.prototype);
-
-	const handleChange = (event, elem) => {
-		comp.setState({ [elem]: event.target.value });
+class UserSignup extends React.Component {
+	state = {
+		username: '',
+		password: '',
+		passwordConfirm: '',
+		message: ''
 	};
 
-	const handleSubmit = (event) => {
+	handleChange = (event, elem) => {
+		this.setState({ [elem]: event.target.value });
+	};
+
+	handleSubmit = (event) => {
 		event.preventDefault();
-		if (comp.state.password !== comp.state.passwordConfirm) {
-			comp.setState({
+		if (this.state.password !== this.state.passwordConfirm) {
+			this.setState({
 				message: 'Password confirmation is not equal to password'
 			});
 		} else {
-			comp.props.onSubmit({
-				username: comp.state.username,
-				password: comp.state.password
+			this.props.onSubmit({
+				username: this.state.username,
+				password: this.state.password
 			})
-			.then(() => comp.props.history.push('/signin'))
+			.then(() => this.props.history.push('/signin'))
 			.catch((err) => {
-				comp.setState({
+				this.setState({
 					username: '',
 					password: '',
 					passwordConfirm: '',
@@ -37,58 +41,47 @@ const UserSignup = (props) => {
 		}
 	};
 	
-	return Object.assign(comp, {
-		props,
-
-		state: {
-			username: '',
-			password: '',
-			passwordConfirm: '',
-			message: ''
-		},
-
-		render() {
-			let message = null;
-			if (this.state.message !== '') {
-				message = (
-					<FormGroup color="danger">
-						<FormFeedback> { this.state.message } </FormFeedback>
-					</FormGroup>
-				);
-			}
-			return (
-				<Col sm="12" md={{ size: 6, offset: 3 }}>
-					<Form onSubmit={ handleSubmit }>
-						<FormGroup row>
-							<InputGroup>
-								<InputGroupAddon> <i className="fa fa-user"></i> </InputGroupAddon>
-								<Input type="text" value={ this.state.username } onChange={ (e) => handleChange(e, 'username') } name="username" id="username" placeholder="Username" autoFocus />
-							</InputGroup>
-						</FormGroup>
-						<FormGroup row>
-							<InputGroup>
-								<InputGroupAddon> <i className="fa fa-key"></i> </InputGroupAddon>
-								<Input type="password" value={ this.state.password } onChange={ (e) => handleChange(e, 'password') } name="password" id="password" placeholder="Password" />
-							</InputGroup>
-						</FormGroup>
-						<FormGroup row>
-							<InputGroup>
-								<InputGroupAddon> <i className="fa fa-key"></i> </InputGroupAddon>
-								<Input type="password" value={ this.state.passwordConfirm } onChange={ (e) => handleChange(e, 'passwordConfirm') } name="passwordconfirm" id="passwordconfirm" placeholder="Password confirmation" />
-							</InputGroup>
-						</FormGroup>
-						<FormGroup row>
-							<Button color="primary">
-								<i className="fa fa-sign-in"></i> Signup
-							</Button>
-						</FormGroup>
-						{ message }
-					</Form>
-				</Col>
-			)
+	render() {
+		let message = null;
+		if (this.state.message !== '') {
+			message = (
+				<FormGroup color="danger">
+					<FormFeedback> { this.state.message } </FormFeedback>
+				</FormGroup>
+			);
 		}
-	});
-};
+		return (
+			<Col sm="12" md={{ size: 6, offset: 3 }}>
+				<Form onSubmit={ this.handleSubmit }>
+					<FormGroup row>
+						<InputGroup>
+							<InputGroupAddon> <i className="fa fa-user"></i> </InputGroupAddon>
+							<Input type="text" value={ this.state.username } onChange={ (e) => this.handleChange(e, 'username') } name="username" id="username" placeholder="Username" autoFocus />
+						</InputGroup>
+					</FormGroup>
+					<FormGroup row>
+						<InputGroup>
+							<InputGroupAddon> <i className="fa fa-key"></i> </InputGroupAddon>
+							<Input type="password" value={ this.state.password } onChange={ (e) => this.handleChange(e, 'password') } name="password" id="password" placeholder="Password" />
+						</InputGroup>
+					</FormGroup>
+					<FormGroup row>
+						<InputGroup>
+							<InputGroupAddon> <i className="fa fa-key"></i> </InputGroupAddon>
+							<Input type="password" value={ this.state.passwordConfirm } onChange={ (e) => this.handleChange(e, 'passwordConfirm') } name="passwordconfirm" id="passwordconfirm" placeholder="Password confirmation" />
+						</InputGroup>
+					</FormGroup>
+					<FormGroup row>
+						<Button color="primary">
+							<i className="fa fa-sign-in"></i> Signup
+						</Button>
+					</FormGroup>
+					{ message }
+				</Form>
+			</Col>
+		)
+	}
+}
 
 UserSignup.propTypes = {
 	onSubmit: PropTypes.func.isRequired,

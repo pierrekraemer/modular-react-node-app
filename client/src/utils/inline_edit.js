@@ -1,69 +1,65 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const InlineEdit = (props) => {
-	let textInput;
+class InlineEdit extends React.Component {
+	state = {
+		text: this.props.text,
+		lastSave: this.props.text,
+		editing: false
+	};
 
-	const comp = Object.create(React.Component.prototype);
+	textInput = null;
 
-	const toggleEdit = (event) => {
+	toggleEdit = (event) => {
 		event.preventDefault();
-		comp.setState({ editing: true });
+		this.setState({ editing: true });
 	};
 
-	const handleChange = (event) => {
-		comp.setState({ text: event.target.value });
+	handleChange = (event) => {
+		this.setState({ text: event.target.value });
 	};
 
-	const handleKeyUp = (event) => {
+	handleKeyUp = (event) => {
 		if (event.keyCode === 13) {
-			handleBlur();
+			this.handleBlur();
 		}
 	};
 
-	const handleBlur = () => {
-		comp.setState({ editing: false });
-		props.onEdited(comp.state.text)
-		.then(() => comp.setState({ lastSave: comp.state.text }))
-		.catch(() => comp.setState({ text: comp.state.lastSave }));
+	handleBlur = () => {
+		this.setState({ editing: false });
+		this.props.onEdited(this.state.text)
+		.then(() => this.setState({ lastSave: this.state.text }))
+		.catch(() => this.setState({ text: this.state.lastSave }));
 	};
 
-	return Object.assign(comp, {
-		state: {
-			text: props.text,
-			lastSave: props.text,
-			editing: false
-		},
-
-		componentDidUpdate(prevProps, prevState) {
-			if (this.state.editing && !prevState.editing) {
-				textInput.focus();
-			}
-		},
-
-		render() {
-			if (this.state.editing) {
-				return (
-					<input type="text" value={ this.state.text }
-						ref={ (elem) => textInput = elem }
-						onChange={ handleChange }
-						onKeyUp={ handleKeyUp }
-						onBlur={ handleBlur }
-					/>
-				);
-			} else {
-				return (
-					<span>
-						{ this.state.text }
-						<a href="" className="btn btn-small text-warning" onClick={ toggleEdit }>
-							<i className="fa fa-pencil"></i>
-						</a>
-					</span>
-				);
-			}
+	componentDidUpdate(prevProps, prevState) {
+		if (this.state.editing && !prevState.editing) {
+			this.textInput.focus();
 		}
-	});
-};
+	}
+
+	render() {
+		if (this.state.editing) {
+			return (
+				<input type="text" value={ this.state.text }
+					ref={ (elem) => this.textInput = elem }
+					onChange={ this.handleChange }
+					onKeyUp={ this.handleKeyUp }
+					onBlur={ this.handleBlur }
+				/>
+			);
+		} else {
+			return (
+				<span>
+					{ this.state.text }
+					<a href="" className="btn btn-small text-warning" onClick={ this.toggleEdit }>
+						<i className="fa fa-pencil"></i>
+					</a>
+				</span>
+			);
+		}
+	}
+}
 
 InlineEdit.propTypes = {
 	text: PropTypes.string.isRequired,
