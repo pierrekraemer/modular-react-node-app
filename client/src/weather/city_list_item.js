@@ -27,7 +27,7 @@ class CityListItem extends React.Component {
 	
 	render() {
 		return (
-			<ListGroupItem color={ this.props.active ? 'info' : '' }>
+			<ListGroupItem className="d-flex align-items-center" color={ this.props.active ? 'info' : '' }>
 				<Link to={ '/weather/' + this.props.city.id } className="col" style={{ textDecoration: 'none' }}> { this.props.city.name } </Link>
 				<Button outline color="primary" className="ml-auto" onClick={ this.props.onRefresh }>
 					<i className="fa fa-refresh"></i>

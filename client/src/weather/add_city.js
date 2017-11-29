@@ -23,7 +23,7 @@ const AddCity = (props) => {
 		<Form onSubmit={ handleSubmit }>
 			<InputGroup>
 				<InputGroupAddon> <i className="fa fa-globe"></i> </InputGroupAddon>
-				<Input type="text" getRef={ (el) => textInput = el } name="cityname" id="cityname" placeholder="City name" autoFocus />
+				<Input type="text" innerRef={ (el) => textInput = el } name="cityname" id="cityname" placeholder="City name" autoFocus />
 				<InputGroupButton color="primary"> Add </InputGroupButton>
 			</InputGroup>
 		</Form>

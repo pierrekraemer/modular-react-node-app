@@ -7,23 +7,39 @@ import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } f
 import SigninNav from './signin';
 import ConditionalNavItem from './conditional_navitem';
 
-const NavBar = (props) => (
-	<Navbar className="mb-4" color="inverse" inverse toggleable>
-		<NavbarToggler right />
-		<NavbarBrand tag={ Link } to="/"> Home </NavbarBrand>
-		<Collapse navbar>
-			<Nav navbar>
-				<NavItem>
-					<NavLink tag={ Link } to="/weather"> Weather </NavLink>
-				</NavItem>
-				<ConditionalNavItem condition={ () => props.user && props.user.hasRole(['user']) }>
-					<NavLink tag={ Link } to="/todolist"> TodoList </NavLink>
-				</ConditionalNavItem>
-			</Nav>
-			<SigninNav user={ props.user } />
-		</Collapse>
-	</Navbar>
-);
+class NavBar extends React.Component {
+	state = {
+		navbar_open: false
+	};
+	
+	toggleNavbar = () => {
+		this.setState((prevState) => ({
+			navbar_open: !prevState.navbar_open
+		}));
+	};
+	
+	render() {
+		return (
+			<Navbar dark fixed="top" expand="md" className="bg-dark">
+				<div className="container">
+					<NavbarBrand tag={ Link } to="/"> Home </NavbarBrand>
+					<NavbarToggler onClick={ this.toggleNavbar } />
+					<Collapse isOpen={ this.state.navbar_open } navbar>
+						<Nav navbar>
+							<NavItem>
+								<NavLink tag={ Link } to="/weather"> Weather </NavLink>
+							</NavItem>
+							<ConditionalNavItem condition={ () => this.props.user && this.props.user.hasRole(['user']) }>
+								<NavLink tag={ Link } to="/todolist"> TodoList </NavLink>
+							</ConditionalNavItem>
+						</Nav>
+						<SigninNav user={ this.props.user } />
+					</Collapse>
+				</div>
+			</Navbar>
+		);
+	}
+}
 
 NavBar.propTypes = {
 	user: PropTypes.object

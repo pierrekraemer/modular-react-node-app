@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
-import { Card, CardHeader, CardBlock, CardText } from 'reactstrap';
+import { Card, CardHeader, CardBody, CardText } from 'reactstrap';
 
 const CityDetail = (props) => {
 	if (!props.data) {
@@ -11,10 +11,10 @@ const CityDetail = (props) => {
 		return (
 			<Card className="mb-4">
 				<CardHeader> { props.data.name } </CardHeader>
-				<CardBlock>
+				<CardBody>
 					<CardText> Temp: { props.data.main.temp }°C </CardText>
 					<CardText> Humidity: { props.data.main.humidity }% </CardText>
-				</CardBlock>
+				</CardBody>
 			</Card>
 		);
 	}

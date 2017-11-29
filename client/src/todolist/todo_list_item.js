@@ -35,7 +35,7 @@ class TodoListItem extends React.Component {
 
 	render() {
 		return (
-			<ListGroupItem>
+			<ListGroupItem className="d-flex align-items-center">
 				{ this.props.done ? (
 					<a href="" className="btn btn-small text-warning" onClick={ this.toggleDone }>
 						<i className="fa fa-repeat"></i>

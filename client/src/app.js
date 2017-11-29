@@ -24,7 +24,7 @@ const App = (props) => ({
 		return (
 			<div>
 				<NavBar />
-				<div className="container">
+				<div className="container" style={{ marginTop: '5rem' }}>
 					<Route exact path="/" render={ () => (
 						<div className="jumbotron">
 							<h1> Welcome home ! </h1>
