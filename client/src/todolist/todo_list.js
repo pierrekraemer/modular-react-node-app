@@ -12,9 +12,9 @@ const TodoList = (props) => (
 		{ props.todos.map((todo) => (
 			<TodoListItem
 				key={ todo.id }
-				{ ...todo }
-				onUpdate={ (changes) => props.onUpdateTodo(todo.id, changes) }
-				onRemove={ () => props.onRemoveTodo(todo.id) }
+				todo={ todo }
+				onUpdate={ props.onUpdateTodo }
+				onRemove={ props.onRemoveTodo }
 			/>
 		)) }
 	</ListGroup>

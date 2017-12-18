@@ -5,18 +5,18 @@ import { ListGroupItem, Button, Modal, ModalHeader, ModalBody, ModalFooter } fro
 
 import InlineEdit from '../utils/inline_edit';
 
-class TodoListItem extends React.Component {
+class TodoListItem extends React.PureComponent {
 	state = {
 		confirmation_modal_open: false
 	};
 
 	toggleDone = (event) => {
 		event.preventDefault();
-		return this.props.onUpdate({ done: !comp.props.done });
+		return this.props.onUpdate(this.props.todo.id, { done: !this.props.todo.done });
 	};
 	
 	changeText = (text) => {
-		return this.props.onUpdate({ text });
+		return this.props.onUpdate(this.props.todo.id, { text });
 	};
 
 	onRemove = (event) => {
@@ -26,7 +26,7 @@ class TodoListItem extends React.Component {
 
 	confirmRemove = () => {
 		this.setState({ confirmation_modal_open: false });
-		return this.props.onRemove();
+		return this.props.onRemove(this.props.todo.id);
 	};
 
 	dismissRemove = () => {
@@ -36,7 +36,7 @@ class TodoListItem extends React.Component {
 	render() {
 		return (
 			<ListGroupItem className="d-flex align-items-center">
-				{ this.props.done ? (
+				{ this.props.todo.done ? (
 					<a href="" className="btn btn-small text-warning" onClick={ this.toggleDone }>
 						<i className="fa fa-repeat"></i>
 					</a>
@@ -47,10 +47,10 @@ class TodoListItem extends React.Component {
 				)}
 
 				<span style={{
-					color: this.props.done ? 'darkgrey' : 'black',
-					textDecoration: this.props.done ? 'line-through' : 'none'
+					color: this.props.todo.done ? 'darkgrey' : 'black',
+					textDecoration: this.props.todo.done ? 'line-through' : 'none'
 				}}>
-					<InlineEdit text={ this.props.text } onEdited={ this.changeText } />
+					<InlineEdit text={ this.props.todo.text } onEdited={ this.changeText } />
 				</span>
 				
 				<span className="ml-auto">
@@ -71,8 +71,10 @@ class TodoListItem extends React.Component {
 }
 
 TodoListItem.propTypes = {
-	text: PropTypes.string.isRequired,
-	done: PropTypes.bool.isRequired,
+	todo: PropTypes.shape({
+		text: PropTypes.string.isRequired,
+		done: PropTypes.bool.isRequired
+	}).isRequired,
 	onUpdate: PropTypes.func.isRequired,
 	onRemove: PropTypes.func.isRequired
 };

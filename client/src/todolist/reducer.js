@@ -10,8 +10,7 @@ const todoList = (
 		case 'TODOLIST::RESPONSE_ADD_TODO':
 			return [ action.todo, ...state ];
 		case 'TODOLIST::RESPONSE_REMOVE_TODO':
-			const idx = state.findIndex((t) => t.id === action.id);
-			return [ ...state.slice(0, idx), ...state.slice(idx+1) ];
+			return state.filter((t) => t.id !== action.id);
 		case 'TODOLIST::RESPONSE_UPDATE_TODO':
 			return state.map((t) => t.id === action.todo.id ? action.todo : t);
 		case 'USER::SIGNOUT':
