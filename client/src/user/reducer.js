@@ -2,7 +2,7 @@
 const User = {
 	hasRole(roles) {
 		if (Array.isArray(roles)) {
-			return roles.findIndex((r) => this.roles.includes(r)) >= 0;
+			return roles.some((r) => this.roles.includes(r));
 		} else {
 			return this.roles.indexOf(roles) >= 0;
 		}
