@@ -28,14 +28,16 @@ module.exports = {
 
 	userHasRole : (authorized) => {
 		return (req, res, next) => {
-			authorized.forEach((role) => {
-				if (req.user.hasRole(role)) {
-					return next();
-				}
+			let has_role = authorized.some((role) => {
+				return req.user.hasRole(role);
 			});
-			const err = new Error('You are not authorized to get this ressource');
-			err.status = 403;
-			return next(err);
+			if (has_role) {
+				return next();
+			} else {
+				const err = new Error('You are not authorized to get this ressource');
+				err.status = 403;
+				return next(err);
+			}
 		};
 	}
 
