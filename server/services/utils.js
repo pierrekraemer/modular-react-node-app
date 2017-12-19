@@ -28,10 +28,7 @@ module.exports = {
 
 	userHasRole : (authorized) => {
 		return (req, res, next) => {
-			let has_role = authorized.some((role) => {
-				return req.user.hasRole(role);
-			});
-			if (has_role) {
+			if (authorized.some((role) => req.user.hasRole(role))) {
 				return next();
 			} else {
 				const err = new Error('You are not authorized to get this ressource');
