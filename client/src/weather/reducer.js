@@ -29,6 +29,7 @@ const isFetching = (
 		case 'WEATHER::REQUEST_CITY_WEATHER':
 			return true;
 		case 'WEATHER::RESPONSE_CITY_WEATHER':
+		case 'WEATHER::ERROR_RESPONSE_CITY_WEATHER':
 			return false;
 		default:
 			return state;
