@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
 
 	const Todo = sequelize.define(
 		'Todo',
@@ -10,7 +10,7 @@ module.exports = function (sequelize, DataTypes) {
 		}
 	);
 
-	Todo.associate = function (db) {
+	Todo.associate = (db) => {
 		Todo.belongsTo(db.User);
 	};
 

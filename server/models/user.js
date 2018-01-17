@@ -3,7 +3,7 @@
 const
 bcrypt = require('bcrypt');
 
-module.exports = function (sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
 
 	const User = sequelize.define(
 		'User',
@@ -25,13 +25,10 @@ module.exports = function (sequelize, DataTypes) {
 					}
 				}
 			}
-		},
-		{
-			// underscored: true
 		}
 	);
 
-	User.associate = function (db) {
+	User.associate = (db) => {
 		User.hasMany(db.Todo);
 	};
 
