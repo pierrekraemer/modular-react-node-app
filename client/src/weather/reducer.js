@@ -14,12 +14,7 @@ const cities = (
 			}
 		}
 		case 'WEATHER::REMOVE_CITY': {
-			const idx = state.findIndex((c) => c.id === action.id);
-			if (idx === -1) {
-				return state;
-			} else {
-				return [ ...state.slice(0, idx), ...state.slice(idx+1) ];
-			}
+			return state.filter((c) => c.id !== action.id);
 		}
 		default:
 			return state;
@@ -34,6 +29,7 @@ const isFetching = (
 		case 'WEATHER::REQUEST_CITY_WEATHER':
 			return true;
 		case 'WEATHER::RESPONSE_CITY_WEATHER':
+		case 'WEATHER::ERROR_RESPONSE_CITY_WEATHER':
 			return false;
 		default:
 			return state;

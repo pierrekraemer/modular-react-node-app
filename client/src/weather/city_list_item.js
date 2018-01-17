@@ -7,7 +7,7 @@ import {
 	Modal, ModalHeader, ModalBody, ModalFooter
 } from 'reactstrap';
 
-class CityListItem extends React.Component {
+class CityListItem extends React.PureComponent {
 	state = {
 		confirmation_modal_open: false
 	};
@@ -18,18 +18,23 @@ class CityListItem extends React.Component {
 
 	confirmRemove = () => {
 		this.setState({ confirmation_modal_open: false });
-		return this.props.onRemove();
+		return this.props.onRemove(this.props.city.id);
 	};
 
 	dismissRemove = () => {
 		this.setState({ confirmation_modal_open: false });
 	};
+
+	handleRefresh = () => {
+		this.props.onRefresh(this.props.city.name);
+	}
 	
 	render() {
+		console.log('render city item : ' + this.props.city.name);
 		return (
 			<ListGroupItem className="d-flex align-items-center" color={ this.props.active ? 'info' : '' }>
 				<Link to={ '/weather/' + this.props.city.id } className="col" style={{ textDecoration: 'none' }}> { this.props.city.name } </Link>
-				<Button outline color="primary" className="ml-auto" onClick={ this.props.onRefresh }>
+				<Button outline color="primary" className="ml-auto" onClick={ this.handleRefresh }>
 					<i className="fa fa-refresh"></i>
 				</Button>
 				<Button outline color="danger" className="ml-1" onClick={ this.handleRemove }>

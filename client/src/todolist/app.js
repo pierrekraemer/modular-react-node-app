@@ -10,7 +10,7 @@ import AddTodo from './add_todo';
 import { fetchTodos } from './actions';
 
 const TodoApp = (props) => ({
-	componentWillMount() {
+	componentDidMount() {
 		props.fetchTodos();
 	},
 

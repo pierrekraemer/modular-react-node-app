@@ -14,8 +14,8 @@ const CityList = (props) => (
 				active={ city.id === props.currentCityId }
 				key={ city.id }
 				city={ city }
-				onRefresh={ () => props.onRefreshCity(city.name) }
-				onRemove={ () => props.onRemoveCity(city.id) }
+				onRefresh={ props.onRefreshCity }
+				onRemove={ props.onRemoveCity }
 			/>
 		)) }
 	</ListGroup>
