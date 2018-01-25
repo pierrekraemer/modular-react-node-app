@@ -16,22 +16,28 @@ client/
   |-src/
   |  |-index.html            --> main html structure
   |  |-index.js              --> redux store creation + main react renderDOM call
-  |  |-app.js                --> root component
-  |  |-nav/
-  |  |  |-navbar.js          --> navbar component
+  |  |-components            --> react components definitions
+  |  |  |-app.js             --> root component
+  |  |  |-nav/
+  |  |  |  |-navbar.js       --> navbar component
+  |  |  |  |-...
+  |  |  |-todolist/
+  |  |  |  |-index.js        --> main component of the todolist app
+  |  |  |  |-todo_list.js    --> todo list component
+  |  |  |  |-...             --> other components
+  |  |  |-user/
+  |  |  |  |-signin.js       --> signin component
+  |  |  |  |-...             --> other components
   |  |  |-...
-  |  |-todolist/
-  |  |  |-actions.js         --> actions of the todolist app
-  |  |  |-reducer.js         --> reducer of the todolist app
-  |  |  |-app.js             --> main component of the todolist app
-  |  |  |-todo_list.js       --> todo list component
-  |  |  |-...                --> other components
-  |  |-user/
-  |  |  |-actions.js         --> actions of the user management
-  |  |  |-reducer.js         --> reducer of the user management
-  |  |  |-signin.js          --> signin component
-  |  |  |-...                --> other components
-  |  |-...
+  |  |-actions               --> redux action definitions
+  |  |  |-user.js
+  |  |  |-todolist.js
+  |  |  |-...
+  |  |-reducers              --> redux reducers definitions
+  |  |  |-index.js           --> root reducer definition
+  |  |  |-user.js
+  |  |  |-todolist.js
+  |  |  |-...
   |-package.json             --> description of dependencies + build & watch scripts
   |-webpack.config.js        --> webpack config file
 ```
