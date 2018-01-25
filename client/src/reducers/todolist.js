@@ -6,13 +6,13 @@ const todoList = (
 ) => {
 	switch (action.type) {
 		case 'TODOLIST::RESPONSE_FETCH_TODOS':
-			return action.todos;
+			return action.data;
 		case 'TODOLIST::RESPONSE_ADD_TODO':
-			return [ action.todo, ...state ];
+			return [ action.data, ...state ];
 		case 'TODOLIST::RESPONSE_REMOVE_TODO':
-			return state.filter((t) => t.id !== action.id);
+			return state.filter((t) => t.id !== action.data);
 		case 'TODOLIST::RESPONSE_UPDATE_TODO':
-			return state.map((t) => t.id === action.todo.id ? action.todo : t);
+			return state.map((t) => t.id === action.data.id ? action.data : t);
 		case 'USER::SIGNOUT':
 			return [];
 		default:
@@ -26,7 +26,7 @@ const todoFilter = (
 ) => {
 	switch (action.type) {
 		case 'TODOLIST::SET_TODO_FILTER':
-			return action.filter;
+			return action.data;
 		default:
 			return state;
 	}

@@ -9,7 +9,7 @@ const User = {
 	}
 };
 
-const makeUser = (data) => Object.assign(Object.create(User), data);
+const makeUser = (user) => Object.assign(Object.create(User), user);
 
 const user = (
 	state = null,
@@ -17,7 +17,7 @@ const user = (
 ) => {
 	switch (action.type) {
 		case 'USER::RESPONSE_SIGNIN':
-			return makeUser(action.user);
+			return makeUser(action.data);
 		case 'USER::SIGNOUT':
 			return null;
 		default:

@@ -25,5 +25,11 @@ module.exports = {
 				loader: 'url-loader?limit=10000&name=[hash].[ext]&publicPath=public/&outputPath=../'
 			}
 		]
+	},
+	resolve: {
+		modules: [
+			path.resolve(__dirname, 'src'),
+			'node_modules'
+		]
 	}
 };

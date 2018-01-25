@@ -3,16 +3,17 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Col } from 'reactstrap';
 
-import FilterSelector from './filter_selector';
-import TodoList from './todo_list';
-import AddTodo from './add_todo';
+import FilterSelector from 'components/todolist/filter_selector';
+import TodoList from 'components/todolist/todo_list';
+import AddTodo from 'components/todolist/add_todo';
 
-import { fetchTodos } from './actions';
+import { fetchTodos } from 'actions/todolist';
 
-const TodoApp = (props) => ({
+class TodoApp extends React.Component {
+
 	componentDidMount() {
-		props.fetchTodos();
-	},
+		this.props.fetchTodos();
+	}
 
 	render() {
 		return (
@@ -23,7 +24,7 @@ const TodoApp = (props) => ({
 			</Col>
 		);
 	}
-});
+};
 
 TodoApp.propTypes = {
 	fetchTodos: PropTypes.func.isRequired

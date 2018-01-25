@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Form, InputGroup, InputGroupAddon, InputGroupButton, Input } from 'reactstrap';
 
-import { fetchCity } from './actions';
+import { fetchCity } from 'actions/weather';
 
 const AddCity = (props) => {
 
@@ -15,7 +15,7 @@ const AddCity = (props) => {
 		props.onSubmit(textInput.value)
 		.then((res) => {
 			textInput.value = '';
-			props.history.push('/weather/' + res.cityWeather.id);
+			props.history.push('/weather/' + res.data.id);
 		});
 	};
 	

@@ -59,7 +59,7 @@ class InlineEdit extends React.Component {
 			);
 		}
 	}
-}
+};
 
 InlineEdit.propTypes = {
 	text: PropTypes.string.isRequired,

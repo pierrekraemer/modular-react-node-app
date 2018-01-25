@@ -1,8 +1,7 @@
 import 'whatwg-fetch';
-import { checkStatus, authorization } from '../utils/fetch_utils';
+import { checkStatus, authorization } from 'actions/utils/fetch_utils';
 
 export const signin = (credentials) => (dispatch) => {
-	// dispatch(reqSignin());
 	return fetch('/api/user/signin', {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
@@ -12,24 +11,28 @@ export const signin = (credentials) => (dispatch) => {
 	.then((res) => res.json())
 	.then((data) => {
 		window.localStorage.setItem('token', data.token);
-		dispatch(resSignin(data.user));
+		dispatch({
+			type: 'USER::RESPONSE_SIGNIN',
+			data: data.user
+		});
 	});
 };
+
 export const whoami = () => (dispatch) => {
-	// dispatch(reqSignin());
 	return fetch('/api/user/whoami', authorization())
 	.then(checkStatus)
 	.then((res) => res.json())
-	.then((user) => dispatch(resSignin(user)))
-	.catch((err) => dispatch(signout()));
+	.then((data) => dispatch({
+		type: 'USER::RESPONSE_SIGNIN',
+		data
+	}))
+	.catch((err) => {
+		window.localStorage.removeItem('token');
+		dispatch({
+			type: 'USER::SIGNOUT'
+		});
+	});
 };
-// const reqSignin = () => ({
-// 	type: 'USER::REQUEST_SIGNIN'
-// });
-const resSignin = (user) => ({
-	type: 'USER::RESPONSE_SIGNIN',
-	user
-});
 
 export const signup = (credentials) => (dispatch) => {
 	return fetch('/api/user/signup', {
@@ -40,9 +43,9 @@ export const signup = (credentials) => (dispatch) => {
 	.then(checkStatus);
 };
 
-export const signout = () => {
+export const signout = () => (dispatch) => {
 	window.localStorage.removeItem('token');
-	return {
+	dispatch({
 		type: 'USER::SIGNOUT'
-	};
+	});
 };

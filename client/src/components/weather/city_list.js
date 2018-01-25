@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { ListGroup } from 'reactstrap';
 
-import CityListItem from './city_list_item';
+import CityListItem from 'components/weather/city_list_item';
 
-import { fetchCity, removeCity } from './actions';
+import { fetchCity, removeCity } from 'actions/weather';
 
 const CityList = (props) => (
 	<ListGroup>

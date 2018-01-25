@@ -3,22 +3,22 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Route, withRouter } from 'react-router-dom';
 
-import { whoami } from './user/actions';
+import { whoami } from 'actions/user';
 
-import NavBar from './nav/navbar';
+import NavBar from 'components/nav/navbar';
 
-import WeatherApp from './weather/app';
-import TodoListApp from './todolist/app';
-import UserSignin from './user/signin';
-import UserSignup from './user/signup';
-import UserSignout from './user/signout';
+import Weather from 'components/weather';
+import TodoList from 'components/todolist';
 
-const App = (props) => ({
-	props,
+import UserSignin from 'components/user/signin';
+import UserSignup from 'components/user/signup';
+import UserSignout from 'components/user/signout';
 
-	componentWillMount() {
+class App extends React.Component {
+
+	componentDidMount() {
 		this.props.whoami();
-	},
+	}
 
 	render() {
 		return (
@@ -30,8 +30,8 @@ const App = (props) => ({
 							<h1> Welcome home ! </h1>
 						</div>
 					) } />
-					<Route path="/weather" component={ WeatherApp } />
-					<Route path="/todolist" component={ TodoListApp } />
+					<Route path="/weather" component={ Weather } />
+					<Route path="/todolist" component={ TodoList } />
 					<Route exact path="/signin" component={ UserSignin } />
 					<Route exact path="/signup" component={ UserSignup } />
 					<Route exact path="/signout" component={ UserSignout } />
@@ -39,11 +39,11 @@ const App = (props) => ({
 			</div>
 		);
 	}
-});
+};
 
 App.propTypes = {
 	whoami: PropTypes.func.isRequired
-}
+};
 
 export default withRouter(connect(
 	null,

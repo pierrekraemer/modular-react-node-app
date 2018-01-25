@@ -8,7 +8,8 @@ Sequelize = require('sequelize');
 const sequelize = new Sequelize('apptest', 'apptest', 'apptest', {
 	host: 'localhost',
 	port: 3306,
-	dialect: 'mysql'
+	dialect: 'mysql',
+	operatorsAliases: false
 	// logging: false
 });
 

@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { ListGroupItem, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-import InlineEdit from '../utils/inline_edit';
+import InlineEdit from 'components/utils/inline_edit';
 
 class TodoListItem extends React.PureComponent {
 	state = {
-		confirmation_modal_open: false
+		confirmationModalOpen: false
 	};
 
 	toggleDone = (event) => {
@@ -21,16 +21,16 @@ class TodoListItem extends React.PureComponent {
 
 	onRemove = (event) => {
 		event.preventDefault();
-		this.setState({ confirmation_modal_open: true });
+		this.setState({ confirmationModalOpen: true });
 	};
 
 	confirmRemove = () => {
-		this.setState({ confirmation_modal_open: false });
+		this.setState({ confirmationModalOpen: false });
 		return this.props.onRemove(this.props.todo.id);
 	};
 
 	dismissRemove = () => {
-		this.setState({ confirmation_modal_open: false });
+		this.setState({ confirmationModalOpen: false });
 	};
 
 	render() {
@@ -57,7 +57,7 @@ class TodoListItem extends React.PureComponent {
 					<a href="" className="btn btn-small text-danger" onClick={ this.onRemove }> <i className="fa fa-trash"></i> </a>
 				</span>
 
-				<Modal isOpen={ this.state.confirmation_modal_open }>
+				<Modal isOpen={ this.state.confirmationModalOpen }>
 					<ModalHeader> Confirmation </ModalHeader>
 					<ModalBody> Are you sure you want to delete this todo ? </ModalBody>
 					<ModalFooter>
@@ -68,7 +68,7 @@ class TodoListItem extends React.PureComponent {
 			</ListGroupItem>
 		);
 	}
-}
+};
 
 TodoListItem.propTypes = {
 	todo: PropTypes.shape({

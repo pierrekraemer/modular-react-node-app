@@ -36,12 +36,12 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "copyfiles": "^1.2.0",
-    "css-loader": "^0.28.7",
-    "file-loader": "^1.1.5",
+    "css-loader": "^0.28.9",
+    "file-loader": "^1.1.6",
     "npm-run-all": "^4.1.2",
     "onchange": "^3.3.0",
-    "style-loader": "^0.19.0",
+    "style-loader": "^0.19.1",
     "url-loader": "^0.6.2",
-    "webpack": "^3.8.1"
+    "webpack": "^3.10.0"
   }
 }

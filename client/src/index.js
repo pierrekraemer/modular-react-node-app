@@ -10,20 +10,11 @@ import thunkMiddleware from 'redux-thunk';
 
 import { HashRouter } from 'react-router-dom';
 
-import App from './app';
+import App from 'components/app';
 
-import user from './user/reducer';
-import weather from './weather/reducer';
-import todolist from './todolist/reducer';
+import reducer from 'reducers';
 
-const store = createStore(
-	combineReducers({
-		user,
-		weather,
-		todolist
-	}),
-	applyMiddleware(thunkMiddleware)
-);
+const store = createStore(reducer, applyMiddleware(thunkMiddleware));
 
 ReactDOM.render(
 	<Provider store={ store }>

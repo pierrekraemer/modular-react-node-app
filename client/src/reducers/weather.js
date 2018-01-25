@@ -6,15 +6,15 @@ const cities = (
 ) => {
 	switch (action.type) {
 		case 'WEATHER::RESPONSE_CITY_WEATHER': {
-			const idx = state.findIndex((c) => c.id === action.cityWeather.id);
+			const idx = state.findIndex((c) => c.id === action.data.id);
 			if (idx === -1) {
-				return [ ...state, action.cityWeather ];
+				return [ ...state, action.data ];
 			} else {
-				return state.map((c) => c.id === action.cityWeather.id ? action.cityWeather : c);
+				return state.map((c) => c.id === action.data.id ? action.data : c);
 			}
 		}
 		case 'WEATHER::REMOVE_CITY': {
-			return state.filter((c) => c.id !== action.id);
+			return state.filter((c) => c.id !== action.data);
 		}
 		default:
 			return state;

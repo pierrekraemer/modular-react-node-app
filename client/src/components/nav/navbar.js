@@ -4,17 +4,17 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 
-import SigninNav from './signin';
-import ConditionalNavItem from './conditional_navitem';
+import SigninNav from 'components/nav/signin';
+import ConditionalNavItem from 'components/nav/conditional_navitem';
 
 class NavBar extends React.Component {
 	state = {
-		navbar_open: false
+		navbarOpen: false
 	};
 	
 	toggleNavbar = () => {
 		this.setState((prevState) => ({
-			navbar_open: !prevState.navbar_open
+			navbarOpen: !prevState.navbarOpen
 		}));
 	};
 	
@@ -24,12 +24,12 @@ class NavBar extends React.Component {
 				<div className="container">
 					<NavbarBrand tag={ Link } to="/"> Home </NavbarBrand>
 					<NavbarToggler onClick={ this.toggleNavbar } />
-					<Collapse isOpen={ this.state.navbar_open } navbar>
+					<Collapse isOpen={ this.state.navbarOpen } navbar>
 						<Nav navbar>
 							<NavItem>
 								<NavLink tag={ Link } to="/weather"> Weather </NavLink>
 							</NavItem>
-							<ConditionalNavItem condition={ () => this.props.user && this.props.user.hasRole(['user']) }>
+							<ConditionalNavItem condition={ () => this.props.user /*&& this.props.user.hasRole(['user'])*/ }>
 								<NavLink tag={ Link } to="/todolist"> TodoList </NavLink>
 							</ConditionalNavItem>
 						</Nav>
@@ -39,7 +39,7 @@ class NavBar extends React.Component {
 			</Navbar>
 		);
 	}
-}
+};
 
 NavBar.propTypes = {
 	user: PropTypes.object

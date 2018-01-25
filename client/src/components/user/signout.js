@@ -3,17 +3,18 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import { signout } from './actions';
+import { signout } from 'actions/user';
 
-const UserSignout = (props) => ({
-	componentWillMount() {
-		props.signout();
-	},
+class UserSignout extends React.Component {
+
+	componentDidMount() {
+		this.props.signout();
+	}
 	
 	render() {
 		return (<Redirect to="/" />);
 	}
-});
+};
 
 UserSignout.propTypes = {
 	signout: PropTypes.func.isRequired

@@ -30,7 +30,6 @@ class CityListItem extends React.PureComponent {
 	}
 	
 	render() {
-		console.log('render city item : ' + this.props.city.name);
 		return (
 			<ListGroupItem className="d-flex align-items-center" color={ this.props.active ? 'info' : '' }>
 				<Link to={ '/weather/' + this.props.city.id } className="col" style={{ textDecoration: 'none' }}> { this.props.city.name } </Link>
@@ -51,7 +50,7 @@ class CityListItem extends React.PureComponent {
 			</ListGroupItem>
 		);
 	}
-}
+};
 
 CityListItem.propTypes = {
 	city: PropTypes.shape({
